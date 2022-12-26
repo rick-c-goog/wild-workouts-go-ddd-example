@@ -16,7 +16,7 @@ resource "google_project" "project" {
 resource "google_project_iam_member" "owner" {
   role   = "roles/owner"
   member = "user:${var.user}"
-
+  project = var.project
   depends_on = [google_project.project]
 }
 
