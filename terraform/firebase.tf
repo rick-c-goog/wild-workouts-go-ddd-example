@@ -18,9 +18,18 @@ resource "google_project_iam_member" "service_account_firebase_admin" {
   member = "serviceAccount:${google_service_account.firebase.email}"
    project = var.project
 }
+module "org_policy_allow_api_key" {
+  source      = "terraform-google-modules/org-policy/google"
+  policy_for  = "project"
+  project_id  = var.project
+  constraint  = "constraints/iam.disableServiceAccountKeyCreation"
+  policy_type = "list"
+  enforce     = false
+}
 
 resource "google_service_account_key" "firebase_key" {
   service_account_id = google_service_account.firebase.name
+  depends_on=[module.org_policy_allow_api_key]
 }
 
 resource "google_firebase_project" "default" {
