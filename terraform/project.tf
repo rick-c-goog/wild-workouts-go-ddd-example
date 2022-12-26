@@ -58,3 +58,20 @@ resource "google_project_service" "source_repo" {
   service    = "sourcerepo.googleapis.com"
   depends_on = [google_project.project]
 }
+
+module "org_policy_allow_api_key" {
+  source      = "terraform-google-modules/org-policy/google"
+  policy_for  = "project"
+  project_id  = var.project
+  constraint  = "constraints/iam.disableServiceAccountKeyCreation"
+  policy_type = "list"
+  enforce     = false
+}
+module "org_policy_allow_domain_membership" {
+  source      = "terraform-google-modules/org-policy/google"
+  policy_for  = "project"
+  project_id  = var.project_id
+  constraint  = "constraints/iam.allowedPolicyMemberDomains"
+  policy_type = "list"
+  enforce     = false
+}
