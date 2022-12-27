@@ -1,4 +1,5 @@
 resource "null_resource" "enable_firestore" {
+  count=0
   provisioner "local-exec" {
     command = "make firestore"
   }
