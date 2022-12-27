@@ -54,7 +54,7 @@ set_project:
 
 .PHONY: firestore
 firestore: set_project
-	${load_envs} && gcloud firestore databases create "--region=$us-east1" --type=firestore-native
+	${load_envs} && gcloud firestore databases create "--region=us-east1" --type=firestore-native
 
 .PHONY: firebase_builder
 firebase_builder: set_project
