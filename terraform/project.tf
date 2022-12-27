@@ -67,3 +67,23 @@ module "org_policy_allow_api_key" {
   policy_type = "list"
   enforce     = false
 }
+
+module "org_policy_allow_ingress_settings" {
+source = "terraform-google-modules/org-policy/google"
+policy_for = "project"
+project_id = var.project
+constraint = "constraints/cloudfunctions.allowedIngressSettings"
+policy_type = "list"
+enforce = false
+allow= ["IngressSettings.ALLOW_ALL"]
+}
+
+module "org_policy_allow_domain_membership" {
+source = "terraform-google-modules/org-policy/google"
+policy_for = "project"
+project_id = var.project
+constraint = "constraints/iam.allowedPolicyMemberDomains"
+policy_type = "list"
+enforce = false
+
+}
