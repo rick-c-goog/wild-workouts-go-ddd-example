@@ -21,7 +21,6 @@ resource "google_project_iam_member" "service_account_firebase_admin" {
 
 resource "google_service_account_key" "firebase_key" {
   service_account_id = google_service_account.firebase.name
-  depends_on=[module.org_policy_allow_api_key]
 }
 
 resource "google_firebase_project" "default" {
