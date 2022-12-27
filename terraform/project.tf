@@ -67,11 +67,3 @@ module "org_policy_allow_api_key" {
   policy_type = "list"
   enforce     = false
 }
-module "org_policy_allow_domain_membership" {
-  source      = "terraform-google-modules/org-policy/google"
-  policy_for  = "project"
-  project_id  = var.project_id
-  constraint  = "constraints/iam.allowedPolicyMemberDomains"
-  policy_type = "list"
-  enforce     = false
-}
