@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -23,9 +23,9 @@
     "firebase-auth": "^0.1.2",
     "jquery": "^3.4.1",
     "jsonwebtoken": "^8.5.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^8.0.0",
     "popper.js": "^1.16.1",
-    "sass-loader": "^8.0.2",
+    "sass-loader": "^10.0.0",
     "superagent": "^5.2.2",
     "vue": "^2.6.11",
     "vue-router": "^3.1.6",
