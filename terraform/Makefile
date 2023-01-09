@@ -20,8 +20,8 @@ apply:
 .PHONY: push_repo
 push_repo:
 	git config --global credential.https://source.developers.google.com.helper gcloud.sh
-	repo_url=$(shell terraform output -no-color | grep repo_url | awk '{print $$3}') && \
-	if [ -z "$(shell git remote | grep google)" ]; then \
+	repo_url=$(terraform output -no-color | grep repo_url | awk '{print $$3}') && \
+	if [ -z "$(git remote | grep google)" ]; then \
 		git remote add google "$$repo_url"; \
 	else \
 		git remote set-url google "$$repo_url"; \
