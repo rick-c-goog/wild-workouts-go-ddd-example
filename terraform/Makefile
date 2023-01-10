@@ -26,7 +26,7 @@ push_repo:
 	else \
 		git remote set-url google "$$repo_url"; \
 	fi
-	git push google master
+	git push --all google
 
 .PHONY: done
 done:
