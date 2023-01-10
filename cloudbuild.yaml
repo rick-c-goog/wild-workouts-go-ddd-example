@@ -32,21 +32,30 @@ steps:
   entrypoint: ./scripts/deploy.sh
   args: [users, grpc, "$PROJECT_ID"]
 - id: web-deps
-  name: node:12.16.2
-  entrypoint: yarn
-  args: [install]
+  name: gcr.io/cloud-builders/npm
+  args: ['install']
   dir: web
   waitFor: ['-']
 - id: openapi-js
   name: gcr.io/cloud-builders/docker
   entrypoint: "./scripts/openapi-js.sh"
+  args: ["trainer"]
+  waitFor: ['-']
+- id: openapi-js-trainings
+  name: gcr.io/cloud-builders/docker
+  entrypoint: "./scripts/openapi-js.sh"
+  args: ["trainings"]
+  waitFor: ['-']
+- id: openapi-js-users
+  name: gcr.io/cloud-builders/docker
+  entrypoint: "./scripts/openapi-js.sh"
+  args: ["users"]
   waitFor: ['-']
 - id: web-build
-  name: node:12.16.2
-  entrypoint: yarn
-  args: [build]
+  name: gcr.io/cloud-builders/npm
+  args: ['run','build']
   dir: web
-  waitFor: [web-deps, openapi-js]
+  waitFor: [web-deps,openapi-js]
 - name: gcr.io/$PROJECT_ID/firebase
   args: ['deploy', '--project=$PROJECT_ID']
   dir: web
